@@ -16,15 +16,58 @@ A complete, themed, and easily expandable suite of error pages for web servers. 
 
 ---
 
+## File Structure
+```
+The project uses a simple and clean file structure.
+/
+|-- css/
+|   |-- style.css
+|-- errors/
+|   |-- 100.html
+|   |-- ... (all other error files) ...
+|   |-- 601.html
+|   |-- manifest.json  <-- IMPORTANT: The error directory
+|-- index.html
+|-- preview.html
+|-- README.md
+```
+---
+## How to Use
+
+1.  Place all files on your web server.
+2.  Configure your server (e.g., Apache `.htaccess` or Nginx `nginx.conf`) to use these files for their corresponding HTTP status codes.
+3.  Navigate to `preview.html` to see a menu of all available error pages.
+
+### Adding a New Error Page
+
+The system is designed to be easy to modify.
+
+1.  **Create the HTML file**: Copy any existing error page in the `errors/` directory and rename it to your new code (e.g., `errors/603.html`). Modify the `<h1>`, `<h2>`, and `<p>` tags inside.
+2.  **Update the Manifest**: Open `errors/manifest.json` and add an entry for your new page. This is the **only step** needed to make it appear in the `preview.html` menu.
+
+    ```json
+    // errors/manifest.json
+
+    {
+      "errors": [
+        // ... all other entries
+        { "code": 602, "name": "Connection Blacklisted" },
+        { "code": 603, "name": "New Custom Error" } // <-- Add your new line here
+      ]
+    }
+    ```
+
+---
+
 ## API Usage
 
 You can fetch these error pages programmatically.
 
 * **Get All Errors**: `GET /errors/manifest.json`
-    * Returns a JSON list of all available error pages.
+  * Returns a JSON list of all available error pages.
 
 * **Get Specific Error**: `GET /errors/{code}.html`
-    * Returns the full HTML of the specified error page.
+  * Returns the full HTML of the specified error page.
 
 #### Example Fetch:
 ```javascript
