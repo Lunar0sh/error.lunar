@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page Directory</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(0, 5, 15, 0.5);
+            border: 1px solid var(--accent-color-glow);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        .menu-container a {
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border-width: 1px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="container">
+    <h1>SYSTEM DIAGNOSTICS</h1>
+    <h2>Select Anomaly to Simulate</h2>
+    <div id="error-menu" class="menu-container">
+        <p>Fetching error directory...</p>
+    </div>
+</div>
+
+<script>
+    // --- Starfield Animation ---
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}window.addEventListener('resize',resizeCanvas);resizeCanvas();const stars=[];const numStars=200;for(let i=0;i<numStars;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*2,speed:Math.random()*.5+.1})}function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle='white';for(const star of stars){ctx.beginPath();ctx.arc(star.x,star.y,star.size,0,Math.PI*2);ctx.fill();star.y+=star.speed;if(star.y>canvas.height){star.y=0;star.x=Math.random()*canvas.width}}requestAnimationFrame(drawStars)}drawStars();
+
+    // --- Dynamic Menu Generation from Manifest ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const menu = document.getElementById('error-menu');
+
+        fetch('errors/manifest.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                menu.innerHTML = ''; // Clear the "fetching" message
+                data.errors.forEach(error => {
+                    const link = document.createElement('a');
+                    link.href = `errors/${error.code}.html`;
+                    link.textContent = error.code;
+                    link.title = error.name; // Adds a hover tooltip
+                    menu.appendChild(link);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching manifest:', error);
+                menu.innerHTML = '<p style="color: var(--danger-color);">Could not load error directory. Check console.</p>';
+            });
+    });
+</script>
+</body>
+</html>

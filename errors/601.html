@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>601 - Integrity Violation</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="container">
+    <h1>601</h1>
+    <h2>THEFT DETECTED</h2>
+    <p>Let's be absolutely clear. You tried to steal our code. We logged the attempt. It's a pathetic, unoriginal, and frankly insulting move from someone with zero integrity. People like you are a cancer on creative work. This content is now permanently unavailable to you. Get a real skill, create something yourself for once, and stop trying to profit from the work of others. You've earned nothing but our contempt and a permanent ban.</p>
+    <a href="https://google.com/search?q=what+is+integrity">LEARN A SKILL</a>
+</div>
+<script>const canvas=document.getElementById("starfield"),ctx=canvas.getContext("2d");function resizeCanvas(){canvas.width=window.innerWidth,canvas.height=window.innerHeight}window.addEventListener("resize",resizeCanvas),resizeCanvas();const stars=[],numStars=200;for(let t=0;t<numStars;t++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*2,speed:.1*Math.random()+.5});function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height),ctx.fillStyle="white";for(const t of stars)ctx.beginPath(),ctx.arc(t.x,t.y,t.size,0,2*Math.PI),ctx.fill(),t.y+=t.speed,t.y>canvas.height&&(t.y=0,t.x=Math.random()*canvas.width);requestAnimationFrame(drawStars)}drawStars();</script>
+</body>
+</html>

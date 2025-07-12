@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>226 - IM Used</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+    <div class="container">
+        <h1>226</h1>
+        <h2>IM USED</h2>
+        <p>The server has fulfilled the request, and the response is a representation of the result of one or more instance-manipulations applied to the current instance. Deal with it.</p>
+        <a href="/">OKAY</a>
+    </div>
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}window.addEventListener('resize',resizeCanvas);resizeCanvas();const stars=[];const numStars=200;for(let i=0;i<numStars;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*2,speed:Math.random()*.5+.1})}function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle='white';for(const star of stars){ctx.beginPath();ctx.arc(star.x,star.y,star.size,0,Math.PI*2);ctx.fill();star.y+=star.speed;if(star.y>canvas.height){star.y=0;star.x=Math.random()*canvas.width}}requestAnimationFrame(drawStars)}drawStars();
+    </script>
+</body>
+</html>

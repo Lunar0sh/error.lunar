@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>407 - Proxy Authentication Required</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="container">
+    <h1>407</h1>
+    <h2>PROXY AUTH REQUIRED</h2>
+    <p>Your proxy requires authentication. The server refuses to talk to an unauthenticated proxy. Authenticate with your proxy and try again. This is between you and it.</p>
+    <a href="/">AUTHENTICATE</a>
+</div>
+<script>const canvas=document.getElementById("starfield"),ctx=canvas.getContext("2d");function resizeCanvas(){canvas.width=window.innerWidth,canvas.height=window.innerHeight}window.addEventListener("resize",resizeCanvas),resizeCanvas();const stars=[],numStars=200;for(let t=0;t<numStars;t++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*2,speed:.1*Math.random()+.5});function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height),ctx.fillStyle="white";for(const t of stars)ctx.beginPath(),ctx.arc(t.x,t.y,t.size,0,2*Math.PI),ctx.fill(),t.y+=t.speed,t.y>canvas.height&&(t.y=0,t.x=Math.random()*canvas.width);requestAnimationFrame(drawStars)}drawStars();</script>
+</body>
+</html>
