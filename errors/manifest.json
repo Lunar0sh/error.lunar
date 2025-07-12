@@ -63,6 +63,10 @@
     { "code": 510, "name": "Not Extended" },
     { "code": 511, "name": "Network Auth Required" },
     { "code": 601, "name": "Thief Detected" },
-    { "code": 602, "name": "Connection Blacklisted" }
+    { "code": 602, "name": "Connection Blacklisted" },
+    { "code": 603, "name": "Maintenance Mode" },
+    { "code": 604, "name": "Invalid API Key" },
+    { "code": 605, "name": "Obsolete Client" },
+    { "code": 610, "name": "Account Locked" }
   ]
 }
